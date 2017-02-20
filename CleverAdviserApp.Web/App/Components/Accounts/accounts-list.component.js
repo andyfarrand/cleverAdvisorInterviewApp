@@ -99,4 +99,3 @@ var App;
     AccountsListController.$inject = ["utility", "$timeout", "MomentJS"];
     angular.module("app").component("accountList", new AccountsListComponent());
 })(App || (App = {}));
-//# sourceMappingURL=accounts-list.component.js.map

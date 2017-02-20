@@ -18,4 +18,3 @@ var App;
     angular.module("app")
         .component("accounts", new AccountsComponent());
 })(App || (App = {}));
-//# sourceMappingURL=accounts.component.js.map

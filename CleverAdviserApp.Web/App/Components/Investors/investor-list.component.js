@@ -115,4 +115,3 @@ var App;
     angular.module("app")
         .component("investorList", new InvestorListComponent());
 })(App || (App = {}));
-//# sourceMappingURL=investor-list.component.js.map

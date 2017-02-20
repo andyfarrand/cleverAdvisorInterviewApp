@@ -15,4 +15,3 @@ var App;
     }());
     angular.module("app").component("investors", new InvestorsComponent());
 })(App || (App = {}));
-//# sourceMappingURL=investors.component.js.map

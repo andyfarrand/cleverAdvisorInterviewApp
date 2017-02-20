@@ -6,11 +6,9 @@ var App;
             this.$q = $q;
         }
         InvestorApiService.prototype.get = function () {
-            console.log("get called");
             var defer = this.$q.defer();
             this.$http.get("/api/investors", { cache: true })
                 .then(function (result) {
-                console.log("result:", result);
                 defer.resolve(result.data);
             }).catch(function (error) {
                 defer.reject(error);
@@ -34,4 +32,3 @@ var App;
     angular.module("app")
         .service("investorApiService", InvestorApiService);
 })(App || (App = {}));
-//# sourceMappingURL=investor-api.service.js.map

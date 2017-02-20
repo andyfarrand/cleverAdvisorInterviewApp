@@ -15,4 +15,3 @@ var App;
     }());
     angular.module("app").component("home", new HomeComponent());
 })(App || (App = {}));
-//# sourceMappingURL=home.component.js.map

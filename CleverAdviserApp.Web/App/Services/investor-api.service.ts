@@ -12,11 +12,9 @@
         }
 
         get() {
-            console.log("get called");
             var defer = this.$q.defer();
             this.$http.get("/api/investors", { cache: true })
                 .then(result => {
-                    console.log("result:", result);
                     defer.resolve((<Investor[]>result.data));
                 }).catch(error => {
                     defer.reject(error);
