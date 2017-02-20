@@ -1,0 +1,7 @@
+﻿<div>
+    <h2>Accounts</h2>
+    <div> Investor: {{$ctrl.investor.name}} {{$ctrl.investor.surname}}</div>
+    <div> Total Amount Invested: {{$ctrl.investor.totalInvested | currency:"£":2}}</div>
+    <hr />
+    <account-list accounts="$ctrl.investor.accounts"></account-list>
+</div>

@@ -1,0 +1,120 @@
+﻿<div class="table-responsive investor-table">
+   <div class="sort-row">
+        <div class="result-counts">
+            Showing {{($ctrl.currentPage-1)*$ctrl.perPage + 1}} to {{($ctrl.currentPage-1)*$ctrl.perPage + $ctrl.perPage }} of {{filtered.length}} results
+            <span ng-if="filtered.length < $ctrl.investors.length"> ({{$ctrl.investors.length - filtered.length}} hidden by filters)</span>
+        </div>
+        <div class="sort-label">
+            Sort By:
+        </div>
+        <div class="sort-select">
+            <select class="form-control"
+                    ng-options="option.label for option in $ctrl.sorts track by option.label"
+                    ng-model="$ctrl.selectedSort"
+                    ng-change="$ctrl.currentPage = 1"></select>
+        </div>
+    </div>
+    <table class="table table-striped table-hover">
+        <thead>
+            <tr>
+                <th>
+                    Investor Id
+                </th>
+                <th>
+                    Name
+                </th>
+                <th>
+                    Surname
+                </th>
+                <th>
+                    Date Created
+                </th>
+                <th>
+                   Accounts
+                </th>
+                <th>
+                    Total Invested
+                </th>
+            </tr>
+            <tr>
+                <td>
+                    <div class="input-group">
+                        <input type="text" class="form-control" ng-model="$ctrl.idFilter" style="max-width:50px"/>
+                        <span class="input-group-btn">
+                            <button class="btn btn-danger" ng-click="$ctrl.idFilter = null">&times;</button>
+                        </span>
+                    </div>
+                </td>
+                <td>
+                    <div class="input-group">
+                        <input type="text" class="form-control" ng-model="$ctrl.nameFilter" />
+                        <span class="input-group-btn">
+                            <button class="btn btn-danger" ng-click="$ctrl.nameFilter= null">&times;</button>
+                        </span>
+                    </div>
+                </td>
+                <td>
+                    <div class="input-group">
+                        <input type="text" class="form-control" ng-model="$ctrl.surnameFilter" />
+                        <span class="input-group-btn">
+                            <button class="btn btn-danger" ng-click="$ctrl.surnameFilter = null">&times;</button>
+                        </span>
+                    </div>
+                </td>
+                <td>
+                    <div class="input-group">
+                        <input type="text" date-range-picker class="form-control date-picker" ng-model="$ctrl.dateFilter" />
+                        <span class="input-group-btn">
+                            <button class="btn btn-danger" ng-click="$ctrl.clearCalendar($event)">&times;</button>
+                        </span>
+                    </div>
+                </td>
+                <td>
+                    <div class="input-group">
+                        <select class="form-control" ng-options="option for option in $ctrl.numOfAccountsList" ng-model="$ctrl.numOfAccountsFilter" style="min-width:62px">
+                            <option value="" label="" selected></option>
+                        </select>
+                        <span class="input-group-btn">
+                            <button class="btn btn-danger" ng-click="$ctrl.clearAccounts()">&times;</button>
+                        </span>
+                    </div>
+                </td>
+                <td>
+                    <div class="input-group">
+                        <select id="investmentSelect" name="investmentSelect" style="min-width:120px"
+                                 ng-options="option.display for option in $ctrl.investmentAmounts track by option.min"
+                                 ng-model="$ctrl.investmentAmountSelectedFilter" class="form-control">
+                            <option value="" label="" selected></option>
+                        </select>
+                        <span class="input-group-btn">
+                            <button class="btn btn-danger" ng-click="$ctrl.clearInvested()">&times;</button>
+                        </span>
+                    </div>
+                </td>
+            </tr>
+        </thead>
+        <tbody>
+            <tr class="selectable" ui-sref="accounts({id: investor.investorId})" ng-repeat="investor in paged = (filtered = ($ctrl.investors | orderBy: $ctrl.selectedSort.predicate:$ctrl.selectedSort.sortReverse | filter: $ctrl.applyFilters ) | startFrom: (($ctrl.currentPage-1)*$ctrl.perPage) | limitTo: $ctrl.perPage ) ">
+                <td>
+                    {{::investor.investorId}}
+                </td>
+                <td>
+                    {{::investor.name}}
+                </td>
+                <td>
+                    {{::investor.surname}}
+                </td>
+                <td>
+                    {{::investor.dateCreated | convertToDate | date: "dd MMM yyyy"}}
+                </td>
+                <td>
+                    {{::investor.numberOfAccounts}}
+                </td>
+                <td>
+                    {{::investor.totalInvested | currency: "£":2}}
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <ul uib-pagination total-items="filtered.length" ng-model="$ctrl.currentPage"></ul>
+</div>
